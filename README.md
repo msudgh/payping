@@ -6,7 +6,7 @@ PayPing API client for the Elixir language
 
 ## Installation
 
-the package can be installed by adding `payping` to your list of dependencies in `mix.exs`:
+The package can be installed by adding `payping` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
@@ -15,3 +15,24 @@ def deps do
   ]
 end
 ```
+
+## Configuration
+
+`:payping` can be configured in your `config/config.exs` or `config/{env}.exs` file:
+
+```exs
+config :payping,
+  token: "Bearer YOUR_TOKEN",
+  base_url: "https://api.payping.ir" # Optional
+```
+
+## TODO
+
+- [ ] Payment
+
+  - [x] POST /v2/pay
+  - [x] POST /v2/pay/verify
+  - [ ] POST /v2/pay/multi
+  - [ ] POST /v2/pay/BlockMoney
+  - [ ] POST /v2/pay/pos
+  - [ ] POST /v2/pay/{code}
