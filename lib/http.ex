@@ -1,21 +1,18 @@
-defmodule HTTP do
-  @moduledoc """
-  HTTP Client Wrapper
-  """
+defmodule PayPing.HTTP do
+  @moduledoc false
   use HTTPoison.Base
-  alias PayPing
-
-  @token PayPing.config()[:token]
-  @base_url PayPing.config()[:base_url]
 
   def process_url(url) do
-    @base_url <> url
+    base_url = Application.get_env(:payping, :base_url)
+    base_url <> url
   end
 
   def process_request_headers(headers) do
+    token = Application.get_env(:payping, :token)
+
     custom_headers = [
       {"Content-Type", "application/json"},
-      {"Authorization", @token}
+      {"Authorization", token}
     ]
 
     headers ++ custom_headers
@@ -31,6 +28,10 @@ defmodule HTTP do
     end
   end
 
+  @doc """
+  Execute
+  """
+  @spec async_handler(any) :: term | {:error, integer | nil, term}
   def async_handler(fun) do
     req =
       Task.async(fn ->

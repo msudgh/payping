@@ -1,10 +1,10 @@
 defmodule PayPing do
   @moduledoc """
-  PayPing Elixir
+  PayPing API client for the Elixir language
   """
   @moduledoc since: "0.1.0"
 
-  alias API
+  alias PayPing.HTTP
 
   @type http_error :: {:error, integer, term}
 
