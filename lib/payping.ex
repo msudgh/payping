@@ -34,7 +34,7 @@ defmodule PayPing do
           optional(:description) => String.t(),
           required(:returnUrl) => String.t(),
           optional(:clientRefId) => String.t()
-        }) :: %{code: String.t()} | http_error
+        }) :: {:ok, integer(), %{code: String.t()}} | http_error
   def pay(
         %{
           amount: _,
@@ -52,7 +52,7 @@ defmodule PayPing do
           required(:refId) => String.t(),
           required(:amount) => integer
         }
-  @type verify_ok :: %{amount: integer, cardNumber: String.t(), cardHashPan: String.t()}
+  @type verify_ok :: {:ok, integer(), %{amount: integer, cardNumber: String.t(), cardHashPan: String.t()}}
   @spec verify(params :: verify_params) :: verify_ok | http_error
   def verify(
         %{

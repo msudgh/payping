@@ -19,7 +19,7 @@ defmodule PayPingTest do
       pay_res =
         PayPing.pay(%{amount: 100, returnUrl: "https://example.com/api/payments/cb/payping"})
 
-      assert %{"code" => _} = pay_res
+      assert {:ok, 200, %{"code" => _}} = pay_res
     end
 
     test "it should throw 400 error when refid is invalid to be verified" do

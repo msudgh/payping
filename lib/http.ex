@@ -3,7 +3,7 @@ defmodule PayPing.HTTP do
   use HTTPoison.Base
 
   def process_url(url) do
-    base_url = Application.get_env(:payping, :base_url)
+    base_url = Application.get_env(:payping, :base_url) || "https://api.payping.ir"
     base_url <> url
   end
 
@@ -37,7 +37,7 @@ defmodule PayPing.HTTP do
       Task.async(fn ->
         case fun.() do
           {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-            body
+            {:ok, 200, body}
 
           {:ok,
            %HTTPoison.Response{
