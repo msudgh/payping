@@ -21,7 +21,7 @@ defmodule Payping.MixProject do
   def project do
     [
       app: :payping,
-      version: "0.1.1",
+      version: "0.1.2",
       elixir: "~> 1.10",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
@@ -36,7 +36,7 @@ defmodule Payping.MixProject do
   def application do
     [
       applications: [:httpoison],
-      extra_applications: [:logger]
+      extra_applications: [:logger, :jason]
     ]
   end
 

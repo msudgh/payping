@@ -27,14 +27,15 @@ defmodule PayPing do
   Create a Payment code
   """
   @doc since: "0.1.0"
-  @spec pay(%{
-          required(:amount) => integer,
-          optional(:payerIdentity) => String.t(),
-          optional(:payerName) => String.t(),
-          optional(:description) => String.t(),
-          required(:returnUrl) => String.t(),
-          optional(:clientRefId) => String.t()
-        }) :: {:ok, integer(), %{code: String.t()}} | http_error
+  @type pay_params :: %{
+    required(:amount) => integer,
+    optional(:payerIdentity) => String.t(),
+    optional(:payerName) => String.t(),
+    optional(:description) => String.t(),
+    required(:returnUrl) => String.t(),
+    optional(:clientRefId) => String.t()
+  }
+  @spec pay(params :: pay_params) :: {:ok, integer(), map()} | http_error
   def pay(
         %{
           amount: _,
@@ -49,10 +50,10 @@ defmodule PayPing do
   """
   @doc since: "0.1.0"
   @type verify_params :: %{
-          required(:refId) => String.t(),
-          required(:amount) => integer
-        }
-  @type verify_ok :: {:ok, integer(), %{amount: integer, cardNumber: String.t(), cardHashPan: String.t()}}
+    required(:refId) => String.t(),
+    required(:amount) => integer
+  }
+  @type verify_ok :: {:ok, integer(), map()}
   @spec verify(params :: verify_params) :: verify_ok | http_error
   def verify(
         %{
