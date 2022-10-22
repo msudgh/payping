@@ -25,3 +25,4 @@ payping-*.tar
 *.beam
 
 .elixir_ls
+**/.DS_Store
